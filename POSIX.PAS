@@ -12,7 +12,7 @@ Unit POSIX;
 INTERFACE
 
 Uses
- DOS;
+ DOS,Strings;
 
 Type
  PFile=^File;
@@ -46,6 +46,11 @@ Type
   tm_sec:Integer;
  End;
  PTM=^TM;
+ Jmp_Buf=Record
+  SegCode:Word;
+  OffCode:Word;
+ End;
+ PSearchRec=^SearchRec;
 
 Var
  ErrNo:Integer;
@@ -65,7 +70,7 @@ Function AtoF(nptr:String):Real;
 Function AtoI(nptr:String):Integer;
 Function AtoL(nptr:String):LongInt;
 Function BSearch(Clef,Base:Pointer;NMemb,Size:Integer;Compare:Pointer):Pointer;
-Function Calloc(N,size_t:Integer):Pointer;
+Function Calloc(N,size:Integer):Pointer;
 Function Ceil(d:Real):Integer;
 Procedure ChDir(S:String);
 Function ChMod(PathName:String;Mode:Word):Integer;
@@ -160,12 +165,52 @@ Function LDiv(Numer,Denom:LongInt):LongInt;
 Function Link(Path1,Path2:String):Integer;
 Function LocaleConv:PLConv;
 Function LocalTime(TimeP:LongInt):PTM;
+Function Log(x:Real):Real;
+Function Log10(x:Real):Real;
+Procedure LongJmp(Var Env:Jmp_Buf;Val:Integer);
+Function LSeek(FilDes:Integer;Offset:LongInt;Base:Integer):Integer;
+Function Malloc(size:Integer):Pointer;
+Function MBLen(S:PChar;Len:Integer):Integer;
+Function MBSTOWCS(Dest,Src:PChar;N:Integer):PChar;
+Function MBToWC(Dest,Src:PChar;N:Integer):PChar;
+Function MemChr(S:PChar;C:Char;N:Integer):Pointer;
+Function MemCmp(Buffer,Search:PChar;N:Integer):Pointer;
+Function MemCpy(Var Dest,Source;N:Integer):Pointer;
+Function MemMove(Var Dest,Source;N:Integer):Pointer;
+Function MemSet(Var Source;C,N:Integer):Pointer;
+Function MkDir(Path:String;Mode:Integer):Integer;
+Function MkFifo(PathName:String;Mode:Integer):Integer;
+Function MkTime(Var TimePtr:TM):LongInt;
+Function Modf(X:Real;Var IPtr:Real):Real;
+Function Nice(Incr:Integer):Integer;
+Function OffsetOf(Var TypeRec,Member):Integer;
+Function Open(PathName:String;Flags,Mode:Integer):Integer;
+Function OpenDir(Name:String):PSearchRec;
+Function PathConf(Path:String;Name:Integer):LongInt;
+Function Pause:Integer;
+Procedure PError(S:String);
+Function Pipe(Var FileDes):Integer;
+Function POW(a,b:Real):Real;
+Function PrintF(Format:String;Var Buffer):Integer;
+Function PutC(C:Integer;Var Stream:Text):Integer;
+Function PutChar(C:Char):Integer;
+Function PutS(S:String):Integer;
+Procedure QSort(Tableau:Pointer;N,Size:Integer;Compare:Pointer);
 
 IMPLEMENTATION
 
 Var
  SaveExit:Pointer;
 
+ { Priv‚ }
+Function ByteHex2Str(value:Byte):String;
+Const
+ matrix:Array[0..15]of Char = ('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F');
+Begin
+ ByteHex2Str:=matrix[(value shr 4) and $0F]+matrix[value and $F];
+End;
+
+ { Public }
 Procedure Abort;Begin
  Halt(255);
 End;
@@ -268,11 +313,11 @@ Function BSearch(Clef,Base:Pointer;NMemb,Size:Integer;Compare:Pointer):Pointer;B
  WriteLn('NON IMPLEMENTEE');
 End;
 
-Function Calloc(N,size_t:Integer):Pointer;
+Function Calloc(N,size:Integer):Pointer;
 Var
  P:Pointer;
 Begin
- GetMem(P,N*size_t);
+ GetMem(P,N*size);
  Calloc:=P;
 End;
 
@@ -895,6 +940,279 @@ Begin
  P^.tm_min:=Min;
  P^.tm_sec:=Sec;
  LocalTime:=P;
+End;
+
+Function Log(x:Real):Real;
+Var
+ negatif:Boolean;
+ fois,i:Integer;
+ ajout,savx,xp,quotient,dl:Real;
+Begin
+ negatif := False;
+ fois := 1;
+ ajout := 0;
+ If x <= 0.0 Then Begin
+  Log:=0;
+  System.Exit;
+ End;
+ If x < 1.0 Then Begin
+  negatif := True;
+  x := 1.0 / x;
+ End;
+ While x >= 10.0 do Begin
+  x := x / 10.0;
+  ajout := ajout + 2.302585092994046;
+ End;
+ While x >= 1.1 do Begin
+  x := Sqrt(x);
+  fois := fois * 2;
+ End;
+ x := x - 1;
+ savx := x;
+ i := 2;
+ xp := x * x;
+ quotient := (xp / i);
+ dl := x - quotient;
+ While 1.0E-15 < quotient do Begin
+  i := i + 1;
+  xp := xp * x;
+  dl := dl + (xp / i);
+  i := i + 1;
+  xp := xp * x;
+  quotient := (xp / i);
+  dl := dl - quotient;
+ End;
+ dl := dl * fois;
+ dl := dl + ajout;
+ If(negatif)Then dl := - dl;
+ Log:=dl;
+End;
+
+Function Log10(x:Real):Real;Begin
+ Log10:=Log(x)/2.3025850930;
+End;
+
+Procedure LongJmp(Var Env:Jmp_Buf;Val:Integer);Begin
+ WriteLn('NON IMPLEMENTEE');
+End;
+
+Function LSeek(FilDes:Integer;Offset:LongInt;Base:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ LSeek:=0;
+End;
+
+Function Malloc(size:Integer):Pointer;
+Var
+ P:Pointer;
+Begin
+ GetMem(P,size);
+ Malloc:=P;
+End;
+
+Function MBLen(S:PChar;Len:Integer):Integer;Begin
+ MBLen:=StrLen(S);
+End;
+
+Function MBSTOWCS(Dest,Src:PChar;N:Integer):PChar;Begin
+ WriteLn('NON IMPLEMENTEE');
+ MBSTOWCS:=NIL;
+End;
+
+Function MBToWC(Dest,Src:PChar;N:Integer):PChar;Begin
+ WriteLn('NON IMPLEMENTEE');
+ MBToWC:=NIL;
+End;
+
+Function MemChr(S:PChar;C:Char;N:Integer):Pointer;
+Var
+ I:Integer;
+Begin
+ MemChr:=NIL;
+ For I:=0 to N-1 do Begin
+  If S[I]=C Then Begin
+   MemChr:=@S[I];
+   System.Exit;
+  End;
+ End;
+End;
+
+Function MemCmp(Buffer,Search:PChar;N:Integer):Pointer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ MemCmp:=NIL;
+End;
+
+Function MemCpy(Var Dest,Source;N:Integer):Pointer;Begin
+ Move(Source,Dest,N);
+ MemCpy:=@Dest;
+End;
+
+Function MemMove(Var Dest,Source;N:Integer):Pointer;Begin
+ Move(Source,Dest,N);
+ MemMove:=@Dest;
+End;
+
+Function MemSet(Var Source;C,N:Integer):Pointer;Begin
+ FillChar(Source,N,C);
+ MemSet:=@Source;
+End;
+
+Function MkDir(Path:String;Mode:Integer):Integer;Begin
+ System.MkDir(Path);
+ MkDir:=IoResult;
+End;
+
+Function MkFifo(PathName:String;Mode:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ MkFifo:=0;
+End;
+
+Function MkTime(Var TimePtr:TM):LongInt;
+Var
+ P:LongInt;
+ D:DateTime;
+Begin
+ D.Year:=TimePtr.tm_year;
+ D.Month:=TimePtr.tm_mon;
+ D.Day:=TimePtr.tm_mday;
+ D.Hour:=TimePtr.tm_hour;
+ D.Min:=TimePtr.tm_min;
+ D.Sec:=TimePtr.tm_sec;
+ PackTime(D,P);
+ MkTime:=P;
+End;
+
+Function Modf(X:Real;Var IPtr:Real):Real;Begin
+ Modf:=Frac(X);
+ IPtr:=X-Frac(X);
+End;
+
+Function Nice(Incr:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Nice:=0;
+End;
+
+Function OffsetOf(Var TypeRec,Member):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ OffsetOf:=0;
+End;
+
+Function Open(PathName:String;Flags,Mode:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Open:=0;
+End;
+
+Function OpenDir(Name:String):PSearchRec;
+Var
+ P:PSearchRec;
+Begin
+ GetMem(P,SizeOf(SearchRec));
+ FindFirst(Name,$FFFF,P^);
+ OpenDir:=P;
+End;
+
+Function PathConf(Path:String;Name:Integer):LongInt;Begin
+ WriteLn('NON IMPLEMENTEE');
+ PathConf:=0;
+End;
+
+Function Pause:Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Pause:=0;
+End;
+
+Procedure PError(S:String);Begin
+ WriteLn('NON IMPLEMENTEE');
+End;
+
+Function Pipe(Var FileDes):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Pipe:=0;
+End;
+
+Function POW(a,b:Real):Real;
+Var
+ p:Real;
+ I:Integer;
+Begin
+ p:=1;
+ For i:=1 to Trunc(b) do Begin
+  p:=p*a;
+ End;
+ Pow:=p;
+End;
+
+Function PrintF(Format:String;Var Buffer):Integer;
+Type
+ PtrRec=Record
+  Ofs,Seg:Word; { Offset et Segment }
+ End;
+Var
+ Ptr:Pointer;
+ PtrReal:PtrRec Absolute Ptr;
+ PChr:^Char Absolute Ptr;
+ PInt:^Integer Absolute Ptr;
+ PStr:^String Absolute Ptr;
+ I:Byte;
+Begin
+ I:=1;
+ While(I<=Length(Format))do Begin
+  If '%'=Format[I]Then Begin
+   I:=I+1;
+   Case Format[I]of
+    'c':Begin
+     Write(PChr^);
+     {$IFDEF FPC}
+      Inc(Ptr,SizeOf(Char));
+     {$ELSE}
+      Inc(PtrReal.Ofs,SizeOf(Char));
+     {$ENDIF}
+    End;
+    'i':Begin
+     Write(PInt^);
+     {$IFDEF FPC}
+      Inc(Ptr,SizeOf(Integer));
+     {$ELSE}
+      Inc(PtrReal.Ofs,SizeOf(Integer));
+     {$ENDIF}
+    End;
+    's':Begin
+     Write(PStr^);
+     {$IFDEF FPC}
+      Inc(Ptr,SizeOf(String));
+     {$ELSE}
+      Inc(PtrReal.Ofs,SizeOf(String));
+     {$ENDIF}
+    End;
+    'x':Begin
+     Write(ByteHex2Str(Byte(PChr^)));
+     {$IFDEF FPC}
+      Inc(Ptr,SizeOf(Char));
+     {$ELSE}
+      Inc(PtrReal.Ofs,SizeOf(Char));
+     {$ENDIF}
+    End;
+   End;
+  End;
+  I:=I+1;
+ End;
+End;
+
+Function PutC(C:Integer;Var Stream:Text):Integer;Begin
+ Write(Stream,C);
+ PutC:=IOResult;
+End;
+
+Function PutChar(C:Char):Integer;Begin
+ Write(C);
+ PutChar:=IOResult;
+End;
+
+Function PutS(S:String):Integer;Begin
+ WriteLn(S);
+End;
+
+Procedure QSort(Tableau:Pointer;N,Size:Integer;Compare:Pointer);Begin
+ WriteLn('NON IMPLEMENTEE');
 End;
 
 END.
