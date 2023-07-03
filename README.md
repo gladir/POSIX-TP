@@ -454,6 +454,130 @@ Voici la liste des fonctions reconnus dans l'unité POSIX :
 		<td><b>LOCALTIME</b></td>
         <td>Cette fonction convertie des secondes depuis le 1er janvier 1970 en date et heure.</td>
 	</tr>
+	 <tr>
+		<td><b>LOG</b></td>
+        <td>Cette fonction retourne le logarithme naturel ou népérien.</td>
+	</tr>
+    <tr>
+		<td><b>LOG10</b></td>
+        <td>Cette fonction retourne le logarithme décimal.</td>
+	</tr>
+    <tr>
+		<td><b>LONGJMP</b></td>
+        <td>Cette fonction permet d'effectuer la restauration de la pile dans un saut non local.</td>
+	</tr>
+    <tr>
+		<td><b>LSEEK</b></td>
+        <td>Cette fonction permet d'effectuer le positionnement du pointeur de fichier <i>Handle</i>.</td>
+	</tr>
+    <tr>
+		<td><b>MALLOC</b></td>
+        <td>Cette fonction permet une allocation de mémoire dynamique de «<i>n</i>» octets.</td>
+	</tr>
+    <tr>
+		<td><b>MBLEN</b></td>
+        <td>Cette fonction permet de retourner la longueur d'une chaine de caractères de format <i>Unicode</i> ou multi-octets. Officiellement, cette fonction n'est pas supportée par <i>Perl</i>.</td>
+	</tr>
+    <tr>
+		<td><b>MBSTOWCS</b></td>
+        <td>Cette fonction permet de convertir une chaine de caractères de format multi-octets en <i>Unicode</i>. Officiellement, cette fonction n'est pas supportée par <i>Perl</i>.</td>
+	</tr>
+    <tr>
+		<td><b>MBTOWC</b></td>
+        <td>Cette fonction permet de convertir une chaine de caractères de format multi-octets en <i>Unicode</i>. Officiellement, cette fonction n'est pas supportée par <i>Perl</i>.</td>
+	</tr>
+    <tr>
+		<td><b>MEMCHR</b></td>
+        <td>Cette fonction permet de rechercher un caractère dans le tampon de «<i>n</i>» octets.</td>
+	</tr>	
+    <tr>
+		<td><b>MEMCMP</b></td>
+        <td>Cette fonction permet de rechercher un tampon de recherche dans le tampon de données de «n» octets.</td>
+	</tr>
+    <tr>
+		<td><b>MEMCPY</b></td>
+        <td>Cette fonction permet de copier un tampon source dans un tampon de destination de «<i>n</i>» octets.</td>
+	</tr>
+    <tr>
+		<td><b>MEMMOVE</b></td>
+        <td>Cette fonction permet de copier un tampon source dans un tampon de destination de «<i>n</i>» octets.</td>
+	</tr>
+    <tr>
+		<td><b>MEMSET</b></td>
+        <td>Cette fonction permet de remplir avec un caractère un tampon de «<i>n</i>» octets.</td>
+	</tr>
+    <tr>
+		<td><b>MKDIR</b></td>
+        <td>Cette fonction permet de créer un nouveau répertoire.</td>
+	</tr>
+    <tr>
+		<td><b>MKFIFO</b></td>
+        <td>Cette fonction permet de créer un tube <i>FIFO</i> à l'emplacement spécifié.</td>
+	</tr>
+    <tr>
+		<td><b>MKTIME</b></td>
+        <td>Cette fonction permet de convertir les informations de date et heure en un temps de calendrier.</td>
+	</tr>
+    <tr>
+		<td><b>MODF</b></td>
+        <td>Cette fonction transforme un nombre réel en partie entière et en décimal (fraction).</td>
+	</tr>
+    <tr>
+		<td><b>NICE</b></td>
+        <td>Cette fonction permet de modifier les préférences de planification de tâche du processus courant.</td>
+	</tr>
+    <tr>
+		<td><b>OFFSETOF</b></td>
+		<td>Cette fonction permet de retourner le nombre d'octets d'un nom de champs à partir de la position du début de la structure d'enregistrement.</td>
+	</tr>
+    <tr>
+		<td><b>OPEN</b></td>
+        <td>Cette fonction permet d'effectuer l'ouverture d'un fichier en lecture et écriture.</td>
+	</tr>
+    <tr>
+		<td><b>OPENDIR</b></td>
+        <td>Cette fonction permet d'ouvrir un répertoire.</td>
+	</tr>
+    <tr>
+		<td><b>PATHCONF</b></td>
+        <td>Cette fonction permet de demander la valeur d'une limite de configuration d'un répertoire ou d'un fichier.</td>
+	</tr>
+    <tr>
+		<td><b>PAUSE</b></td>
+        <td>Cette fonction permet de suspendre l'exécution du processus courant jusqu'à ce qu'un signal soit reçu.</td>
+	</tr>
+    <tr>
+		<td><b>PERROR</b></td>
+        <td>Cette fonction envoi un message d'erreur sur la sortie standard d'erreur.</td>
+	</tr>
+    <tr>
+		<td><b>PIPE</b></td>
+        <td>Cette fonction permet d'effectuer la création d'un canal entre processus.</td>
+	</tr>
+    <tr>
+		<td><b>POW</b></td>
+        <td>Cette fonction retourne le calcul de <i>x</i> à la puissance <i>y</i>.</td>
+	</tr>
+    <tr>
+		<td><b>PRINTF</b></td>
+        <td>Cette fonction effectue l'écriture de texte selon un certain format sur la console.</td>
+	</tr>
+    <tr>
+		<td><b>PUTC</b></td>
+        <td>Cette fonction effectue l'écriture d'un caractère dans un fichier.</td>
+	</tr>
+    <tr>
+		<td><b>PUTCHAR</b></td>
+        <td>Cette fonction effectue l'écriture d'un caractère sur la console.</td>
+	</tr>
+    <tr>
+		<td><b>PUTS</b></td>
+        <td>Cette fonction effectue l'écriture d'une chaine de caractères sur la console.</td>
+	</tr>
+    <tr>
+		<td><b>QSORT</b></td>
+        <td>Cette fonction permet d'effectuer un tri d'un tableau avec la méthode «<i>QuickSort</i>».</td>
+	</tr>
  <tr>
    <td>...</td>
    <td>...</td>
