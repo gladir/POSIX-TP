@@ -578,6 +578,98 @@ Voici la liste des fonctions reconnus dans l'unité POSIX :
 		<td><b>QSORT</b></td>
         <td>Cette fonction permet d'effectuer un tri d'un tableau avec la méthode «<i>QuickSort</i>».</td>
 	</tr>
+	<tr>
+		<td><b>RAISE</b></td>
+        <td>Cette fonction permet d'envoyer un signal au processus courant.</td>
+	</tr>
+    <tr>
+		<td><b>RAND</b></td>
+        <td>Cette fonction retourne un nombre aléatoire entre 0 et 1.</td>
+	</tr>
+    <tr>
+		<td><b>READ</b></td>
+        <td>Cette fonction permet d'effectuer la lecture d'un fichier.</td>
+	</tr>
+    <tr>
+		<td><b>READDIR</b></td>
+        <td>Cette fonction permet de lire une entrée de répertoire précédemment ouvert par «<i>opendir</i>».</td>
+	</tr>
+    <tr>
+		<td><b>REALLOC</b></td>
+        <td>Cette fonction permet de changer la taille d'un bloc de mémoire dynamique.</td>
+	</tr>
+    <tr>
+		<td><b>REMOVE</b></td>
+        <td>Cette fonction permet de supprimer un ou plusieurs fichiers.</td>
+	</tr>
+    <tr>
+		<td><b>RENAME</b></td>
+        <td>Cette fonction permet de changer le nom d'un répertoire ou d'un fichier.</td>
+	</tr>
+    <tr>
+		<td><b>REWIND</b></td>
+        <td>Cette fonction ramène le pointeur de fichier au début de ce fichier.</td>
+	</tr>
+    <tr>
+		<td><b>REWINDDIR</b></td>
+        <td>Cette fonction permet de se positionner sur la première entrée de répertoire précédemment ouvert par «<i>opendir</i>».</td>
+	</tr>
+    <tr>
+		<td><b>RMDIR</b></td>
+        <td>Cette fonction permet de supprimer un répertoire.</td>
+	</tr>
+    <tr>
+		<td><b>SCANF</b></td>
+        <td>Cette fonction permet la lecture de texte suivant un certain format dans une console standard.</td>
+	</tr>
+    <tr>
+		<td><b>SETGID</b></td>
+        <td>Cette fonction permet de fixer l'identificateur de groupe réel et effectif pour un processus.</td>
+	</tr>
+    <tr>
+		<td><b>SETJMP</b></td>
+        <td>Cette fonction effectue la sauvegarde de la pile.</td>
+	</tr>
+    <tr>
+		<td><b>SETLOCALE</b></td>
+        <td>Cette fonction permet de modifier des requêtes sur le programme locale.</td>
+	</tr>
+    <tr>
+		<td><b>SETPGID</b></td>
+        <td>Cette fonction permet de fixer l'identificateur de groupe de processus du processus courant.</td>
+	</tr>
+    <tr>
+		<td><b>SETSID</b></td>
+        <td>Cette fonction permet de fixer l'identificateur de session du processus courant.</td>
+	</tr>
+    <tr>
+		<td><b>SETUID</b></td>
+        <td>Cette fonction permet de fixer l'identificateur d'utilisateur réel et effectif d'un processus.</td>
+	</tr>
+    <tr>
+		<td><b>SIGACTION</b></td>
+        <td>Cette fonction permet d'effectuer la gestion détaillée d'un signal.</td>
+	</tr>
+    <tr>
+		<td><b>SIGLONGJMP</b></td>
+        <td>Cette fonction permet d'effectuer la restauration de la pile dans un saut non local et d'envoyer un signal.</td>
+	</tr>	
+    <tr>
+		<td><b>SIGPENDING</b></td>
+        <td>Cette fonction permet d'examiner le signal bloquant ou en attente.</td>
+	</tr>	
+    <tr>
+		<td><b>SIGPROCMASK</b></td>
+        <td>Cette fonction permet de modifier et/ou d'examiner le masque de signal du processus appelant.</td>
+	</tr>	
+    <tr>
+		<td><b>SIGSETJMP</b></td>
+        <td>Cette fonction effectue la sauvegarde de la pile et envoi un signal.</td>
+	</tr>
+    <tr>
+		<td><b>SIGSUSPEND</b></td>
+        <td>Cette fonction permet d'installer un masque de signal et de suspendre le processus jusqu'à ce que le signal se produise.</td>
+	</tr>
  <tr>
    <td>...</td>
    <td>...</td>
