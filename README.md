@@ -730,6 +730,46 @@ Voici la liste des fonctions reconnus dans l'unité POSIX :
 		<td><b>STRERROR</b></td>
         <td>Cette fonction pointe sur le message d'erreur correspondant à «<i>noerr</i>».</td>
 	</tr>
+	<tr>
+		<td><b>STRFTIME</b></td>
+        <td>Cette fonction permet d'effectuer la conversion des informations de date et de l'heure en une chaine de caractères.</td>
+	</tr>
+    <tr>
+		<td><b>STRLEN</b></td>
+        <td>Cette fonction permet de calculer la longueur de la chaine de caractères.</td>
+	</tr>
+    <tr>
+		<td><b>STRNCAT</b></td>
+        <td>Cette fonction permet d'ajouter les «<i>n</i>» premiers caractères de la chaine de caractères «<i>str1</i>» à la chaine de caractères «<i>str2</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRNCMP</b></td>
+        <td>Cette fonction permet de comparer les «<i>n</i>» premiers caractères de la chaine de caractères «<i>str1</i>» à la chaine de caractères «<i>str2</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRNCPY</b></td>
+        <td>Cette fonction permet de copier les «<i>n</i>» premiers caractères de la chaine de caractères «<i>str1</i>» à la chaine de caractères «<i>str2</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRPBRK</b></td>
+        <td>Cette fonction effectue la recherche dans la chaine de caractères «<i>source</i>» de la chaine de caractères «<i>accept</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRRCHR</b></td>
+        <td>Cette fonction effectue la recherche du dernière caractère «<i>c</i>» dans la chaine de caractères «<i>str</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRSPN</b></td>
+        <td>Cette fonction effectue le calcul de la longueur de la chaine de caractères «<i>str1</i>» dans lequel sont compris des caractères de la chaine de caractères «<i>str2</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRSTR</b></td>
+        <td>Cette fonction permet de trouver la première sous-chaine contenue dans la chaine de caractères.</td>
+	</tr>
+    <tr>
+		<td><b>STRTOD</b></td>
+        <td>Cette fonction permet de convertir la chaine de caractères en nombre de type «<i>double</i>».</td>
+	</tr>
  <tr>
    <td>...</td>
    <td>...</td>
