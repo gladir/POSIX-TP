@@ -670,6 +670,66 @@ Voici la liste des fonctions reconnus dans l'unité POSIX :
 		<td><b>SIGSUSPEND</b></td>
         <td>Cette fonction permet d'installer un masque de signal et de suspendre le processus jusqu'à ce que le signal se produise.</td>
 	</tr>
+	 <tr>
+		<td><b>SIN</b></td>
+        <td>Cette fonction trigonométrique retourne le «<i>Sinus</i>».</td>
+	</tr>
+    <tr>
+		<td><b>SINH</b></td>
+        <td>Cette fonction trigonométrique retourne le «<i>Sinus</i>» hyperbolique.</td>
+	</tr>
+    <tr>
+		<td><b>SLEEP</b></td>
+        <td>Cette fonction permet de faire passer en mode pause le processus courant.</td>
+	</tr>
+    <tr>
+		<td><b>SPRINTF</b></td>
+        <td>Cette fonction effectue l'écriture de texte selon un certain format à partir d'une chaine de caractères.</td>
+	</tr>
+    <tr>
+		<td><b>SQRT</b></td>
+        <td>Cette fonction retourne la racine carrée d'un nombre.</td>
+	</tr>
+    <tr>
+		<td><b>SRAND</b></td>
+        <td>Cette fonction permet d'initialiser le générateur de nombre aléatoire.</td>
+	</tr>
+    <tr>
+		<td><b>SSCANF</b></td>
+        <td>Cette fonction permet la lecture de texte suivant un certain format à partir d'un tampon.</td>
+	</tr>
+    <tr>
+		<td><b>STAT</b></td>
+        <td>Cette fonction permet de demander tous les propriétés d'un fichier.</td>
+	</tr>
+    <tr>
+		<td><b>STRCAT</b></td>
+        <td>Cette fonction permet la concaténation de chaines de caractères.</td>
+	</tr>
+    <tr>
+		<td><b>STRCHR</b></td>
+        <td>Cette fonction effectue la recherche du premier caractère «<i>c</i>» dans la chaine de caractères «<i>str</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRCMP</b></td>
+        <td>Cette fonction effectue la comparaison de deux chaines de caractères.</td>
+	</tr>
+    <tr>
+		<td><b>STRCOLL</b></td>
+        <td>Cette fonction permet de comparer deux chaines de caractères en format locale sans effectuer de différence entre les majuscules ou les minuscules.</td>
+	</tr>
+    <tr>
+		<td><b>STRCPY</b></td>
+        <td>Cette fonction effectue la copie d'une chaine de caractères dans une autre chaine de caractères.</td>
+	</tr>
+    <tr>
+		<td><b>STRCSPN</b></td>
+        <td>Cette fonction effectue la recherche de la sous-chaine «<i>str1</i>» ne contenant aucun des caractères contenu dans «<i>str2</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRERROR</b></td>
+        <td>Cette fonction pointe sur le message d'erreur correspondant à «<i>noerr</i>».</td>
+	</tr>
  <tr>
    <td>...</td>
    <td>...</td>
