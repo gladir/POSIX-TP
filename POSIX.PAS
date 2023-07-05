@@ -14,6 +14,35 @@ INTERFACE
 Uses
  DOS,Strings;
 
+Const
+ EZERO=0;
+ EINVFNC=1;
+ ENOFILE=2;
+ ENOPATH=3;
+ ECONTR=7;
+ EINVMEM=9;
+ EINVENV=10;
+ EINVFMT=11;
+ EINVACC=12;
+ EINVDAT=13;
+ EINVDRV=15;
+ ECURDIR=16;
+ ENOTSAM=17;
+ ENMFILE=18;
+ ENOENT=2;
+ EMFILE=4;
+ EACCES=5;
+ EBADF=6;
+ ENOMEM=8;
+ ENODEV=15;
+ EINVAL=19;
+ E2BIG=20;
+ ENOEXEC=21;
+ EXDEV=22;
+ EDOM=33;
+ ERANGE=34;
+ EEXIST=35;
+
 Type
  PFile=^File;
  FileOfChar=File Of Char;
@@ -50,6 +79,8 @@ Type
   SegCode:Word;
   OffCode:Word;
  End;
+ SearchRec=DOS.SearchRec;
+ DIR=SearchRec;
  PSearchRec=^SearchRec;
 
 Var
@@ -196,8 +227,48 @@ Function PutC(C:Integer;Var Stream:Text):Integer;
 Function PutChar(C:Char):Integer;
 Function PutS(S:String):Integer;
 Procedure QSort(Tableau:Pointer;N,Size:Integer;Compare:Pointer);
+Function Raise(Sig:Integer):Integer;
+Function Rand:Integer;
+Function Read(FilDes:Integer;Var Buffer;NByte:Integer):Integer;
+Function ReadDir(Var S:SearchRec):PSearchRec;
+Function ReAlloc(Ptr:Pointer;Size:Integer):Pointer;
+Function Remove(PathName:String):Integer;
+Function Rename(Old,New:String):Integer;
+Procedure Rewind(Var F:File);
+Procedure RewindDir(Var S:SearchRec);
+Function RmDir(Path:String):Integer;
+Function ScanF(Format:String;Var Buffer):Integer;
+Function SetGID(GID:Integer):Integer;
+Function SetJmp(Var Env):Integer;
+Function SetLocale(Category:Integer;Locale:String):String;
+Function SetPGID(PID,PGID:Integer):Integer;
+Function SetSID:Integer;
+Function SetUID(UID:Integer):Integer;
+Function SigAction(Sig:Integer;Const Act; Var OAct):Integer;
+Procedure SigLongJmp(Var Env;Valeur:Integer);
+Function SigPending(Var _Set):Integer;
+Function SigProcMask(How:Integer;Const _Set;Var OSet):Integer;
+Function SigSetJmp(Var SigJmp_Buf;SaveSigs:Integer):Integer;
+Function SigSuspend(Var SigMask):Integer;
+Function Sin(X:Real):Real;
+Function SinH(X:Real):Real;
+Function Sleep(Seconds:Integer):Integer;
+Function SPrintF(Var Target:String;Format:String;Var Buffer):Integer;
+Function Sqrt(X:Real):Real;
+Procedure SRand(Seed:Integer);
+Function SScanF(Var Str:String;Format:String;Var Buffer):Integer;
+Function Stat(Path:String;Var Buf):Integer;
+Function StrCat(Dest,Source:PChar):PChar;
+Function StrChr(S:PChar;C:Char):PChar;
+Function StrCmp(Str1,Str2:PChar):Integer;
+Function StrColl(Str1,Str2:PChar):Integer;
+Function StrCpy(Dest,Source:PChar):PChar;
+Function StrCSpn(Str1,Str2:PChar):Integer;
+Function StrError(NoErr:Integer):PChar;
 
 IMPLEMENTATION
+
+Uses Crt;
 
 Var
  SaveExit:Pointer;
@@ -529,7 +600,7 @@ Function FGetC(Var F:FileOfChar):Char;
 Var
  C:Char;
 Begin
- Read(F,C);
+ System.Read(F,C);
 End;
 
 Function FGetPos(Var F:File;Pos:LongInt):LongInt;Begin
@@ -718,7 +789,7 @@ Function GetC(Var F:Text):Char;
 Var
  C:Char;
 Begin
- Read(F,C);
+ System.Read(F,C);
  GetC:=C;
 End;
 
@@ -726,7 +797,7 @@ Function GetChar:Char;
 Var
  C:Char;
 Begin
- Read(C);
+ System.Read(C);
  GetChar:=C;
 End;
 
@@ -1213,6 +1284,316 @@ End;
 
 Procedure QSort(Tableau:Pointer;N,Size:Integer;Compare:Pointer);Begin
  WriteLn('NON IMPLEMENTEE');
+End;
+
+Function Raise(Sig:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Raise:=0;
+End;
+
+Function Rand:Integer;Begin
+ Rand:=Random(32767);
+End;
+
+Function Read(FilDes:Integer;Var Buffer;NByte:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Read:=0;
+End;
+
+Function ReadDir(Var S:SearchRec):PSearchRec;Begin
+ FindNext(S);
+ ReadDir:=@S;
+End;
+
+Function ReAlloc(Ptr:Pointer;Size:Integer):Pointer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ ReAlloc:=Ptr;
+End;
+
+Function Remove(PathName:String):Integer;
+Var
+ F:File;
+Begin
+ {$I-}Assign(F,PathName);
+ Erase(F);
+ {$I+}
+ Remove:=IoResult;
+End;
+
+Function Rename(Old,New:String):Integer;
+Var
+ F:File;
+Begin
+ {$I-}Assign(F,Old);
+ System.Rename(F,New);
+ {$I+}
+ Rename:=IoResult;
+End;
+
+Procedure Rewind(Var F:File);Begin
+ Seek(F,0);
+End;
+
+Procedure RewindDir(Var S:SearchRec);Begin
+ WriteLn('NON IMPLEMENTEE');
+End;
+
+Function RmDir(Path:String):Integer;Begin
+ System.RmDir(Path);
+ RmDir:=IoResult;
+End;
+
+Function ScanF(Format:String;Var Buffer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ ScanF:=0;
+End;
+
+Function SetGID(GID:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SetGID:=0;
+End;
+
+Function SetJmp(Var Env):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SetJmp:=0;
+End;
+
+Function SetLocale(Category:Integer;Locale:String):String;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SetLocale:='';
+End;
+
+Function SetPGID(PID,PGID:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SetPGID:=0;
+End;
+
+Function SetSID:Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SetSID:=0;
+End;
+
+Function SetUID(UID:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SetUID:=0;
+End;
+
+Function SigAction(Sig:Integer;Const Act; Var OAct):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SigAction:=0;
+End;
+
+Procedure SigLongJmp(Var Env;Valeur:Integer);Begin
+ WriteLn('NON IMPLEMENTEE');
+End;
+
+Function SigPending(Var _Set):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SigPending:=0;
+End;
+
+Function SigProcMask(How:Integer;Const _Set;Var OSet):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SigProcMask:=0;
+End;
+
+Function SigSetJmp(Var SigJmp_Buf;SaveSigs:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SigSetJmp:=0;
+End;
+
+Function SigSuspend(Var SigMask):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SigSuspend:=0;
+End;
+
+Function Sin(X:Real):Real;
+Var
+ R,S:Real;
+ I:Byte;
+Begin
+ R:=X*X;
+ S:=42.0;
+ For I:=10 downto 1 do S:=4.0*I-2.0+(-R)/S;
+ Sin:=2.0*X*S/(R+S*S);
+End;
+
+Function SinH(X:Real):Real;Begin
+ SinH:=(Exp(X)-Exp(-X))/2;
+End;
+
+Function Sleep(Seconds:Integer):Integer;Begin
+ Delay(Seconds);
+End;
+
+Function SPrintF(Var Target:String;Format:String;Var Buffer):Integer;
+Type
+ PtrRec=Record
+  Ofs,Seg:Word; { Offset et Segment }
+ End;
+Var
+ Ptr:Pointer;
+ PtrReal:PtrRec Absolute Ptr;
+ PChr:^Char Absolute Ptr;
+ PInt:^Integer Absolute Ptr;
+ PStr:^String Absolute Ptr;
+ I:Byte;
+ SInt:String;
+ Err:Word;
+Begin
+ Target:='';
+ I:=1;
+ While(I<=Length(Format))do Begin
+  If '%'=Format[I]Then Begin
+   I:=I+1;
+   Case Format[I]of
+    'c':Begin
+     Target:=Target+PChr^;
+     {$IFDEF FPC}
+      Inc(Ptr,SizeOf(Char));
+     {$ELSE}
+      Inc(PtrReal.Ofs,SizeOf(Char));
+     {$ENDIF}
+    End;
+    'i':Begin
+     Val(SInt,PInt^,Err);
+     Target:=Target+SInt;
+     {$IFDEF FPC}
+      Inc(Ptr,SizeOf(Integer));
+     {$ELSE}
+      Inc(PtrReal.Ofs,SizeOf(Integer));
+     {$ENDIF}
+    End;
+    's':Begin
+     Target:=Target+PStr^;
+     {$IFDEF FPC}
+      Inc(Ptr,SizeOf(String));
+     {$ELSE}
+      Inc(PtrReal.Ofs,SizeOf(String));
+     {$ENDIF}
+    End;
+    'x':Begin
+     Target:=Target+ByteHex2Str(Byte(PChr^));
+     {$IFDEF FPC}
+      Inc(Ptr,SizeOf(Char));
+     {$ELSE}
+      Inc(PtrReal.Ofs,SizeOf(Char));
+     {$ENDIF}
+    End;
+   End;
+  End;
+  I:=I+1;
+ End;
+ SPrintF:=Length(Target);
+End;
+
+Function Sqrt(X:Real):Real;
+Var
+ A,B,M,XN:Real;
+Begin
+ If X=0.0Then Begin
+  Sqrt:=0.0;
+ End
+  Else
+ Begin
+  M := 1.0;
+  XN := X;
+  While XN >= 2.0 do Begin
+   XN := 0.25 * XN;
+   M := 2.0 * M;
+  End;
+  While XN < 0.5 do Begin
+   XN:=4.0 * XN;
+   M:=0.5 * M;
+  End;
+  A:=XN;
+  B:=1.0-XN;
+  Repeat
+   A:=A*(1.0+0.5*B);
+   B:=0.25*(3.0+B)*B*B;
+  Until B<1.0E-15;
+  Sqrt:=A*M;
+ End;
+End;
+
+Procedure SRand(Seed:Integer);Begin
+ Randomize;
+End;
+
+Function SScanF(Var Str:String;Format:String;Var Buffer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SScanF:=0;
+End;
+
+Function Stat(Path:String;Var Buf):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Stat:=0;
+End;
+
+Function StrCat(Dest,Source:PChar):PChar;Begin
+ StrCat:=Strings.StrCat(Dest,Source);
+End;
+
+Function StrChr(S:PChar;C:Char):PChar;
+Var
+ I:Integer;
+Begin
+ While S[I]<>#0 do Begin
+  If S[I]=C Then Begin
+   StrChr:=@S[I];
+  End;
+ End;
+End;
+
+Function StrCmp(Str1,Str2:PChar):Integer;Begin
+ StrCmp:=StrComp(Str1,Str2);
+End;
+
+Function StrColl(Str1,Str2:PChar):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrColl:=0;
+End;
+
+Function StrCpy(Dest,Source:PChar):PChar;Begin
+ StrCpy:=StrCopy(Dest,Source);
+End;
+
+Function StrCSpn(Str1,Str2:PChar):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrCSpn:=0;
+End;
+
+Function StrError(NoErr:Integer):PChar;Begin
+ StrError:='';
+ Case NoErr of
+  EZERO:StrError:='Erreur 0';
+  EINVFNC:StrError:='Num‚ro de fonction invalide';
+  ENOFILE:StrError:='Fichier introuvable';
+  ENOPATH:StrError:='Chemin introuvable';
+  ECONTR:StrError:='Bloc de m‚moire d‚truit';
+  EINVMEM:StrError:='Adresse de bloc m‚moire invalide';
+  EINVENV:StrError:='Environnement invalide';
+  EINVFMT:StrError:='Format invalide';
+  EINVACC:StrError:='Code d''accŠs invalide';
+  EINVDAT:StrError:='Donn‚es invalide';
+  EINVDRV:StrError:='Unit‚ invalide sp‚cifi‚';
+  ECURDIR:StrError:='Tentative d''enlever le r‚pertoire courant';
+  ENOTSAM:StrError:='Ce n''est pas le mˆme p‚riph‚rique';
+  ENMFILE:StrError:='Il n''y a plus de fichiers';
+  EMFILE:StrError:='Trop de fichier ouvert simultan‚ment';
+  EACCES:StrError:='Permission refus‚';
+  EBADF:StrError:='Mauvais num‚ro de fichier';
+  ENOMEM:StrError:='Il n''y a plus de m‚moire';
+  {ENODEV:StrError:='Aucun p‚riph‚rique de ce type';}
+  EINVAL:StrError:='ParamŠtre inavlide';
+  E2BIG:StrError:='Liste de paramŠtres trop longue';
+  ENOEXEC:StrError:='Erreur de format d''ex‚cutable';
+  EXDEV:StrError:='Liaison de p‚riph‚rique incorrecte';
+  EDOM:StrError:='ParamŠtre en dehors du domaine de la fonction';
+  ERANGE:StrError:='R‚sultat trop large';
+  EEXIST:StrError:='Le fichier existe d‚j…';
+  Else StrError:='Erreur inconnu';
+ End;
 End;
 
 END.
