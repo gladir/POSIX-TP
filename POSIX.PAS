@@ -265,6 +265,16 @@ Function StrColl(Str1,Str2:PChar):Integer;
 Function StrCpy(Dest,Source:PChar):PChar;
 Function StrCSpn(Str1,Str2:PChar):Integer;
 Function StrError(NoErr:Integer):PChar;
+Function StrFTime(S:PChar;Max:Integer;Format:PChar;Var X:TM):Integer;
+Function StrLen(S:PChar):Integer;
+Function StrNCat(Str1,Str2:PChar;N:Integer):PChar;
+Function StrNCmp(Str1,Str2:PChar;N:Integer):Integer;
+Function StrNCpy(Str1,Str2:PChar;N:Integer):PChar;
+Function StrPBrk(Source,Accept:PChar):PChar;
+Function StrRChr(Str:PChar;C:Char):PChar;
+Function StrSpn(Str1,Str:PChar):Integer;
+Function StrStr(Str2,Str1:PChar):PChar;
+Function StrToD(NPtr:PChar;Var EndPtr:PChar):Double;
 
 IMPLEMENTATION
 
@@ -1594,6 +1604,88 @@ Function StrError(NoErr:Integer):PChar;Begin
   EEXIST:StrError:='Le fichier existe d‚j…';
   Else StrError:='Erreur inconnu';
  End;
+End;
+
+Function StrFTime(S:PChar;Max:Integer;Format:PChar;Var X:TM):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrFTime:=0;
+End;
+
+Function StrLen(S:PChar):Integer;Begin
+ StrLen:=Strings.StrLen(S);
+End;
+
+Function StrNCat(Str1,Str2:PChar;N:Integer):PChar;
+Var
+ L1:Integer;
+Begin
+ L1:=StrLen(Str1);
+ Move(Str2^,Str1[L1],N);
+ Str1[L1+N]:=#0;
+End;
+
+Function StrNCmp(Str1,Str2:PChar;N:Integer):Integer;
+Var
+ I:Integer;
+Begin
+ StrNCmp:=0;
+ For I:=0 to N do Begin
+  If Str1[I]<Str2[I]Then Begin
+   StrNCmp:=-1;
+   System.Exit;
+  End
+   Else
+  If Str1[I]>Str2[I]Then Begin
+   StrNCmp:=1;
+   System.Exit;
+  End;
+ End;
+End;
+
+Function StrNCpy(Str1,Str2:PChar;N:Integer):PChar;
+Var
+ L1,L2:Integer;
+Begin
+ L1:=StrLen(Str1);
+ L2:=StrLen(Str2);
+ Move(Str1^,Str2^,N);
+ If L2<N Then Str2[N]:=#0;
+ StrNCpy:=Str2;
+End;
+
+Function StrPBrk(Source,Accept:PChar):PChar;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrPBrk:=NIL;
+End;
+
+Function StrRChr(Str:PChar;C:Char):PChar;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrRChr:=NIL;
+End;
+
+Function StrSpn(Str1,Str:PChar):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrSpn:=0;
+End;
+
+Function StrStr(Str2,Str1:PChar):PChar;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrStr:=NIL;
+End;
+
+Function StrToD(NPtr:PChar;Var EndPtr:PChar):Double;
+Var
+ R:Double;
+ Err:Word;
+ I:Integer;
+Begin
+ Val(StrPas(NPtr),R,Err);
+ I:=0;
+ While NPtr[I] in['0'..'9','.','E','-','+']do Begin
+  Inc(I);
+ End;
+ EndPtr:=@NPtr[I];
+ StrToD:=R;
 End;
 
 END.
