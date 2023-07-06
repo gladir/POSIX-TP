@@ -12,6 +12,9 @@ Unit POSIX;
 INTERFACE
 
 Uses
+ {$IFDEF WINDOWS}
+  SysUtils,
+ {$ENDIF}
  DOS,Strings;
 
 Const
@@ -42,6 +45,19 @@ Const
  EDOM=33;
  ERANGE=34;
  EEXIST=35;
+  {Constante umask}
+ S_IRUSR=256;
+ S_IWUSR=128;
+ S_IXUSR=64;
+ S_IRGRP=32;
+ S_IWGRP=16;
+ S_IXGRP=8;
+ S_IROTH=4;
+ S_IWOTH=2;
+ S_IXOTH=1;
+  {Constante Exit,_Exit}
+ EXIT_SUCCESS=0;
+ EXIT_FAILURE=1;
 
 Type
  PFile=^File;
@@ -75,6 +91,24 @@ Type
   tm_sec:Integer;
  End;
  PTM=^TM;
+ TMS=Record
+  tms_utime:LongInt;
+  tms_stime:LongInt;
+  tms_cutime:LongInt;
+  tms_cstime:LongInt;
+ End;
+ Utsname=Record
+  SysName:String;
+  NodeName:String;
+  Release:String;
+  Version:String;
+  Machine:String;
+  DomainName:String;
+ End;
+ UTimeBuf=Record
+  AcTime:LongInt;
+  ModTime:Longint;
+ End;
  Jmp_Buf=Record
   SegCode:Word;
   OffCode:Word;
@@ -85,6 +119,7 @@ Type
 
 Var
  ErrNo:Integer;
+ TZName:String;
 
 Procedure Abort;
 Function Abs(a:Integer):Integer;
@@ -286,6 +321,30 @@ Function TanH(X:Real):Real;
 Function TCDrain(FD:Integer):Integer;
 Function TCFlow(Fd,Action:Integer):Integer;
 Function TCFlush(Fd,Queue_Selector:Integer):Integer;
+Function TCGetPGrp(Fd:Integer):Integer;
+Function TCSendBreak(Fd,Duration:Integer):Integer;
+Function TCSetPGrp(Fd,PGrp:Integer):Integer;
+Function Time(Var PtrHeure):LongInt;
+Function Times(Var Buf:TMS):LongInt;
+Function TmpFiles:PFile;
+Function TmpNam(Name:PChar):PChar;
+Function ToLower(C:Char):Char;
+Function ToUpper(C:Char):Char;
+Function TTYName(Desc:Integer):PChar;
+Procedure TZSet;
+Function Umask(Mask:Integer):Integer;
+Function UName(Var Buf:Utsname):Integer;
+Function UngetC(C:Char;Var PtrFichier:Text):Char;
+Function Unlink(PathName:String):Integer;
+Function Utime(FileName:PChar;Buf:UTimeBuf):Integer;
+Function VFPrintF(Var PtrFichier:File;Format:String;Var Buffer):Integer;
+Function VSPrintF(Var S:String;Format:String;Var Buffer):Integer;
+Function Wait(Stat_Loc:Integer):Integer;
+Function WaitPID(Pid:Integer;Var Status:Integer;Options:Integer):Integer;
+Function WCStombs(S,PWCS:PChar;N:Integer):Integer;
+Function WCTomb(S,WChar:PChar):Integer;
+Function Write(FD:Integer;Var Buffer;Count:Integer):Integer;
+Procedure _Exit(Status:Integer);
 
 IMPLEMENTATION
 
@@ -697,7 +756,7 @@ Function FPrintf(Var F:File;Format:String):Integer;Begin
 End;
 
 Function FPutC(Var F:Text;C:Char):Integer;Begin
- Write(F,C);
+ System.Write(F,C);
  FPutC:=IoResult;
 End;
 
@@ -1252,7 +1311,7 @@ Begin
    I:=I+1;
    Case Format[I]of
     'c':Begin
-     Write(PChr^);
+     System.Write(PChr^);
      {$IFDEF FPC}
       Inc(Ptr,SizeOf(Char));
      {$ELSE}
@@ -1260,7 +1319,7 @@ Begin
      {$ENDIF}
     End;
     'i':Begin
-     Write(PInt^);
+     System.Write(PInt^);
      {$IFDEF FPC}
       Inc(Ptr,SizeOf(Integer));
      {$ELSE}
@@ -1268,7 +1327,7 @@ Begin
      {$ENDIF}
     End;
     's':Begin
-     Write(PStr^);
+     System.Write(PStr^);
      {$IFDEF FPC}
       Inc(Ptr,SizeOf(String));
      {$ELSE}
@@ -1276,7 +1335,7 @@ Begin
      {$ENDIF}
     End;
     'x':Begin
-     Write(ByteHex2Str(Byte(PChr^)));
+     System.Write(ByteHex2Str(Byte(PChr^)));
      {$IFDEF FPC}
       Inc(Ptr,SizeOf(Char));
      {$ELSE}
@@ -1290,12 +1349,12 @@ Begin
 End;
 
 Function PutC(C:Integer;Var Stream:Text):Integer;Begin
- Write(Stream,C);
+ System.Write(Stream,C);
  PutC:=IOResult;
 End;
 
 Function PutChar(C:Char):Integer;Begin
- Write(C);
+ System.Write(C);
  PutChar:=IOResult;
 End;
 
@@ -1763,4 +1822,206 @@ Function TCFlush(Fd,Queue_Selector:Integer):Integer;Begin
  TCFlush:=0;
 End;
 
+Function TCGetPGrp(Fd:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ TCGetPGrp:=0;
+End;
+
+Function TCSendBreak(Fd,Duration:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ TCSendBreak:=0;
+End;
+
+Function TCSetPGrp(Fd,PGrp:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ TCSetPGrp:=0;
+End;
+
+Function Time(Var PtrHeure):LongInt;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Time:=0;
+End;
+
+Function Times(Var Buf:TMS):LongInt;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Times:=0;
+End;
+
+Function TmpFiles:PFile;Begin
+ WriteLn('NON IMPLEMENTEE');
+ TmpFiles:=NIL;
+End;
+
+Function TmpNam(Name:PChar):PChar;Begin
+ WriteLn('NON IMPLEMENTEE');
+ TmpNam:=NIL;
+End;
+
+Function ToLower(C:Char):Char;Begin
+ If C in['A'..'Z']Then C:=Chr(Ord(C)+32);
+ ToLower:=C;
+End;
+
+Function ToUpper(C:Char):Char;Begin
+ If C in['a'..'z']Then C:=Chr(Ord(C)-32);
+ ToUpper:=C;
+End;
+
+Function TTYName(Desc:Integer):PChar;Begin
+ WriteLn('NON IMPLEMENTEE');
+ TTYName:=NIL;
+End;
+
+Procedure TZSet;Begin
+ WriteLn('NON IMPLEMENTEE');
+End;
+
+Function Umask(Mask:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Umask:=0;
+End;
+
+Function UName(Var Buf:Utsname):Integer;
+Var
+ S:String;
+Begin
+ Buf.SysName:='MS-DOS';
+  {$IFDEF LCLcarbon}
+   Buf.SysName:='Mac OS X';
+  {$ELSE}
+   {$IFDEF Linux}
+    Buf.SysName:='GNU/Linux';
+   {$ELSE}
+    {$IFDEF UNIX}
+     Buf.SysName:='Unix';
+    {$ELSE}
+    {$IFDEF WINDOWS}
+     Case Win32Platform of
+      0:Case Win32MajorVersion of
+       3:Buf.SysName:='Windows 3';
+       Else Buf.SysName:='Windows';
+      End;
+      1:Case Win32MajorVersion of
+       4:Case Win32MinorVersion of
+        0:Buf.SysName:='Windows 95';
+        10:Buf.SysName:='Windows 98';
+        90:Buf.SysName:='Windows ME';
+        Else Buf.SysName:='Windows 90X';
+       End;
+      End;
+      2:Begin
+       Case Win32MajorVersion of
+        3:Case Win32MinorVersion of
+         1:Buf.SysName:='Windows NT 3.1';
+         50:Buf.SysName:='Windows NT 3.50';
+         51:Buf.SysName:='Windows NT 3.51';
+         Else Buf.SysName:='Windows NT 3';
+        End;
+        4:Buf.SysName:='Windows NT 4';
+        5:Case Win32MinorVersion of
+         0:Buf.SysName:='Windows 2000';
+         1:Buf.SysName:='Windows XP';
+         2:Buf.SysName:='Windows XP 64';
+         Else Buf.SysName:='Windows 2000 ou XP';
+        End;
+        6:Case Win32MinorVersion of
+         0:Buf.SysName:='Windows Vista ou Windows Server 2003';
+         1:Buf.SysName:='Windows 7 ou Windows Server 2008 R2';
+         2:Buf.SysName:='Windows 8 ou Windows Server 2012';
+         3:Buf.SysName:='Windows 8.1 ou Windows Server 2012 R2';
+         Else Buf.SysName:='Windows';
+        End;
+        Else Buf.SysName:='Windows';
+       End;
+      End;
+     End;
+    {$ENDIF}
+   {$ENDIF}
+  {$ENDIF}
+ {$ENDIF}
+ Buf.NodeName:='TP';
+ Buf.Release:='7.0';
+ Str(Lo(DosVersion),S);
+ Buf.Version:=S;
+ Str(Hi(DosVersion),S);
+ Buf.Version:=Buf.Version+'.'+S;
+ Buf.Machine:=GetEnv('PROCESSOR_ARCHITECTURE');
+ Buf.DomainName:=GetEnv('USERDOMAIN');
+End;
+
+Function UngetC(C:Char;Var PtrFichier:Text):Char;
+Var
+ R:Char;
+Begin
+ System.Read(PtrFichier,R);
+ System.Write(PtrFichier,C);
+ UngetC:=R;
+End;
+
+Function Unlink(PathName:String):Integer;
+Var
+ F:File;
+Begin
+  {$I-}Assign(F,PathName);
+  Erase(F);
+  {$I+}
+  Unlink:=IoResult;
+End;
+
+Function Utime(FileName:PChar;Buf:UTimeBuf):Integer;
+Var
+ F:File;
+Begin
+ {$I-}Assign(F,StrPas(FileName));
+ Reset(F);
+ {$I+}
+ Utime:=IoResult;
+ GetFTime(F,Buf.ModTime);
+ Buf.AcTime:=Buf.ModTime; { On copie l'heure de modification dans l'accäs
+                            car il n'est pas possible de connaitre cette
+                            information }
+ System.Close(F);
+End;
+
+Function VFPrintF(Var PtrFichier:File;Format:String;Var Buffer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ VFPrintF:=0;
+End;
+
+Function VSPrintF(Var S:String;Format:String;Var Buffer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ VSPrintF:=0;
+End;
+
+Function Wait(Stat_Loc:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Wait:=0;
+End;
+
+Function WaitPID(Pid:Integer;Var Status:Integer;Options:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ WaitPID:=0;
+End;
+
+Function WCStombs(S,PWCS:PChar;N:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ WCStombs:=0;
+End;
+
+Function WCTomb(S,WChar:PChar):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ WCTomb:=0;
+End;
+
+Function Write(FD:Integer;Var Buffer;Count:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ Write:=0;
+End;
+
+Procedure _Exit(Status:Integer);Begin
+ Halt(Status);
+End;
+
+BEGIN
+ TZName:='';
 END.
