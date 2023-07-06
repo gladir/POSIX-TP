@@ -791,7 +791,7 @@ Voici la liste des fonctions reconnus dans l'unité POSIX :
         <td>Cette fonction permet de demander les valeurs des variables de configuration système.</td>
 	</tr>
     <tr>
-		<td><b>SYSTEM</b></td>
+		<td><b>SYSTEM_</b></td>
         <td>Cette fonction permet d'effectuer un appel à un programme externe et d'hériter de ses processus.</td>
 	</tr>
     <tr>
@@ -806,10 +806,118 @@ Voici la liste des fonctions reconnus dans l'unité POSIX :
 		<td><b>TCDRAIN</b></td>
         <td>Cette fonction permet de rechercher dans la sortie de la file d'attente d'un flux d'argument.</td>
 	</tr>
- <tr>
-   <td>...</td>
-   <td>...</td>
-  </tr>
+	 <tr>
+		<td><b>TCFLOW</b></td>
+        <td>Cette fonction permet d'effectuer un contrôle de réserve d'un flux d'argument.</td>
+	</tr>
+    <tr>
+		<td><b>TCFLUSH</b></td>
+        <td>Cette fonction permet de vider les tampons d'entrée/sortie d'un flux d'argument.</td>
+	</tr>
+    <tr>
+		<td><b>TCGETPGRP</b></td>
+        <td>Cette fonction permet de demander l'identificateur de groupe de processus d'un flux d'argument.</td>
+	</tr>
+    <tr>
+		<td><b>TCSENDBREAK</b></td>
+        <td>Cette fonction permet d'envoyer un signal d'arrêt à un flux d'argument.</td>
+	</tr>
+    <tr>
+		<td><b>TCSETPGRP</b></td>
+        <td>Cette fonction permet de fixer l'identificateur de groupe de processus d'un groupe de processus de premier plan d'un contrôle de terminal.</td>
+	</tr>
+    <tr>
+		<td><b>TIME</b></td>
+        <td>Cette fonction retourne le nombre de secondes depuis le 1er janvier 1970.</td>
+	</tr>
+    <tr>
+		<td><b>TIMES</b></td>
+        <td>Cette fonction permet de demander de retourner le temps réel écoulés depuis un point du passé (comme le démarrage du système), de l'utilisateur et du système pour un processus parent et enfant.</td>
+	</tr>
+    <tr>
+		<td><b>TMPFILE</b></td>
+        <td>Cette fonction permet d'effectuer la création d'un fichier temporaire.</td>
+	</tr>
+    <tr>
+		<td><b>TMPNAM</b></td>
+        <td>Cette fonction permet de choisir le nom de création d'un fichier temporaire.</td>
+	</tr>
+    <tr>
+		<td><b>TOLOWER</b></td>
+        <td>Cette fonction effectue la conversion d'un caractère en lettre minuscule.</td>
+	</tr>
+    <tr>
+		<td><b>TOUPPER</b></td>
+        <td>Cette fonction effectue la conversion d'un caractère en lettre majuscule.</td>
+	</tr>
+    <tr>
+		<td><b>TTYNAME</b></td>
+        <td>Cette fonction permet de demander le nom du terminal spécifié.</td>
+	</tr>
+    <tr>
+		<td><b>TZNAME</b></td>
+        <td>Cette fonction permet d'effectuer la conversion des informations de temps de la variable <i>tzname</i>.</td>
+	</tr>
+    <tr>
+		<td><b>TZSET</b></td>
+        <td>Cette fonction permet de fixer le fuseau horaire de base d'une variable d'environnement <i>TZ</i>.</td>
+	</tr>
+    <tr>
+		<td><b>UMASK</b></td>
+        <td>Cette fonction permet de changer le masque <i>Unix</i> d'un processus en cours.</td>
+	</tr>
+    <tr>
+		<td><b>UNAME</b></td>
+        <td>Cette fonction permet de demander le nom du système d'exploitation courant.</td>
+	</tr>
+    <tr>
+		<td><b>UNGETC</b></td>
+        <td>Cette fonction effectue la réécriture d'un caractère dans un fichier ayant été lu.</td>
+	</tr>
+    <tr>
+		<td><b>UNLINK</b></td>
+        <td>Cette fonction permet de supprimer un ou plusieurs fichiers.</td>
+	</tr>
+    <tr>
+		<td><b>UTIME</b></td>
+        <td>Cette fonction permet de modifier le temps de fichiers et répertoires.</td>
+	</tr>
+    <tr>
+		<td><b>VFPRINTF</b></td>
+        <td>Cette fonction effectue l'écriture de texte selon un certain format à l'aide de paramètre virtuel.</td>
+	</tr>
+    <tr>
+		<td><b>VPRINTF</b></td>
+        <td>Cette fonction effectue l'écriture de texte selon un certain format à l'aide de paramètre virtuel sur la console.</td>
+	</tr>
+    <tr>
+		<td><b>VSPRINTF</b></td>
+        <td>Cette fonction effectue l'écriture de texte selon un certain format à l'aide de paramètre virtuel à partir d'un tampon.</td>
+	</tr>
+    <tr>
+		<td><b>WAIT</b></td>
+        <td>Cette fonction permet de mettre en attente jusqu'à la fin d'un processus fils.</td>
+	</tr>
+    <tr>
+		<td><b>WAITPID</b></td>
+        <td>Cette fonction permet de mettre en attente jusqu'à la fin d'un processus fils ayant un numéro de processus spécifié (<i>PID</i>).</td>
+	</tr>
+    <tr>
+		<td><b>WCSTOMBS</b></td>
+        <td>Cette fonction permet d'effectuer la conversion d'une chaine de caractères Unicode en une chaine de caractères multi-octets./td>
+	</tr>
+    <tr>
+		<td><b>WCTOMB</b></td>
+        <td>Cette fonction permet d'effectuer la conversion d'une chaine de caractères Unicode en une chaine de caractères multi-octets.</td>
+	</tr>
+    <tr>
+		<td><b>WRITE</b></td>
+        <td>Cette fonction permet d'effectuer des écritures dans un fichier précédemment ouvert.</td>
+	</tr>
+    <tr>
+		<td><b>_EXIT</b></td>
+		<td>Cette fonction permet de mettre fin à l'exécution d'un programme.</td>
+	</tr>
  </table>
 
 <h3>Utilisation</h3>
