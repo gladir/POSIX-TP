@@ -770,6 +770,42 @@ Voici la liste des fonctions reconnus dans l'unité POSIX :
 		<td><b>STRTOD</b></td>
         <td>Cette fonction permet de convertir la chaine de caractères en nombre de type «<i>double</i>».</td>
 	</tr>
+	 <tr>
+		<td><b>STRTOK</b></td>
+        <td>Cette fonction permet de couper la chaine de caractères «<i>str1</i>» en symbole élémentaire (jetons) en les séparant par les caractères de la chaine de caractères «<i>str2</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRTOL</b></td>
+        <td>Cette fonction permet de convertir la chaine de caractères en nombre de type «<i>long</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRTOUL</b></td>
+        <td>Cette fonction permet de convertir la chaine de caractères en nombre de type non-signée «<i>long</i>».</td>
+	</tr>
+    <tr>
+		<td><b>STRXFRM</b></td>
+        <td>Cette fonction permet d'effectuer la transformation d'une chaine de caractères.</td>
+	</tr>
+    <tr>
+		<td><b>SYSCONF</b></td>
+        <td>Cette fonction permet de demander les valeurs des variables de configuration système.</td>
+	</tr>
+    <tr>
+		<td><b>SYSTEM</b></td>
+        <td>Cette fonction permet d'effectuer un appel à un programme externe et d'hériter de ses processus.</td>
+	</tr>
+    <tr>
+		<td><b>TAN</b></td>
+        <td>Cette fonction trigonométrique retourne la «<i>tangente</i>».</td>
+	</tr>
+    <tr>
+		<td><b>TANH</b></td>
+        <td>Cette fonction trigonométrique retourne la «<i>tangente</i>» hyperbolique.</td>
+	</tr>
+    <tr>
+		<td><b>TCDRAIN</b></td>
+        <td>Cette fonction permet de rechercher dans la sortie de la file d'attente d'un flux d'argument.</td>
+	</tr>
  <tr>
    <td>...</td>
    <td>...</td>
