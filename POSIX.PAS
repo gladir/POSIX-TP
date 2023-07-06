@@ -275,6 +275,17 @@ Function StrRChr(Str:PChar;C:Char):PChar;
 Function StrSpn(Str1,Str:PChar):Integer;
 Function StrStr(Str2,Str1:PChar):PChar;
 Function StrToD(NPtr:PChar;Var EndPtr:PChar):Double;
+Function StrTok(Str1,Str2:PChar):PChar;
+Function StrToL(NPtr:PChar;Var EndPtr:PChar):LongInt;
+Function StrToUL(NPtr:PChar;Var EndPtr:PChar;Base:Integer):LongInt;
+Function StrXFrm(Dest,Src:PChar;N:Integer):Integer;
+Function SysConf(Name:Integer):LongInt;
+Function System_(Command:PChar):Integer;
+Function Tan(X:Real):Real;
+Function TanH(X:Real):Real;
+Function TCDrain(FD:Integer):Integer;
+Function TCFlow(Fd,Action:Integer):Integer;
+Function TCFlush(Fd,Queue_Selector:Integer):Integer;
 
 IMPLEMENTATION
 
@@ -1686,6 +1697,70 @@ Begin
  End;
  EndPtr:=@NPtr[I];
  StrToD:=R;
+End;
+
+Function StrTok(Str1,Str2:PChar):PChar;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrTok:=NIL;
+End;
+
+Function StrToL(NPtr:PChar;Var EndPtr:PChar):LongInt;
+Var
+ R:LongInt;
+ Err:Word;
+ I:Integer;
+Begin
+ Val(StrPas(NPtr),R,Err);
+ I:=0;
+ While NPtr[I] in['0'..'9']do Begin
+  Inc(I);
+ End;
+ EndPtr:=@NPtr[I];
+ StrToL:=R;
+End;
+
+Function StrToUL(NPtr:PChar;Var EndPtr:PChar;Base:Integer):LongInt;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrToUL:=0;
+End;
+
+Function StrXFrm(Dest,Src:PChar;N:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ StrXFrm:=0;
+End;
+
+Function SysConf(Name:Integer):LongInt;Begin
+ WriteLn('NON IMPLEMENTEE');
+ SysConf:=0;
+End;
+
+Function System_(Command:PChar):Integer;Begin
+ SwapVectors;
+ Exec(GetEnv('COMSPEC'),'/C '+StrPas(Command));
+ SwapVectors;
+End;
+
+Function Tan(X:Real):Real;Begin
+ Tan:=Sin(X)/Cos(X);
+End;
+
+Function TanH(X:Real):Real;Begin
+ TanH:=(Exp(X)-Exp(-X))/(Exp(X)+Exp(-X));
+End;
+
+Function TCDrain(FD:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ TCDrain:=0;
+End;
+
+Function TCFlow(Fd,Action:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ TCFlow:=0;
+End;
+
+Function TCFlush(Fd,Queue_Selector:Integer):Integer;Begin
+ WriteLn('NON IMPLEMENTEE');
+ TCFlush:=0;
 End;
 
 END.
