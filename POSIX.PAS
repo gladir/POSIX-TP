@@ -693,8 +693,7 @@ Function FGetS(Var S:String;Size:Integer;Var F:Text):String;Begin
 End;
 
 Function FileNo(Var F:File):Integer;Begin
- WriteLn('NON IMPLEMENTEE');
- FileNo:=0;
+ FileNo:=FileRec(F).Handle;
 End;
 
 Function Floor(d:Real):Real;
