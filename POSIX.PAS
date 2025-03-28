@@ -982,8 +982,7 @@ Function IsAlpha(C:Char):Boolean;Begin
 End;
 
 Function IsATTY(Desc:Integer):Boolean;Begin
- WriteLn('NON IMPLEMENTEE');
- IsATTY:=False;
+ IsATTY:=Desc in [0, 1, 2];  { V‚rifie si Desc est un descripteur standard }
 End;
 
 Function IsCntrl(C:Char):Boolean;Begin
